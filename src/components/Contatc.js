@@ -6,15 +6,15 @@ import { putForm } from '../api/form.api';
 import { toast } from 'react-hot-toast';
 
 export const Contact = () => {
-    const formInitialDetails = {
+    /*const formInitialDetails = {
         firstName: '',
         lastName: '',
         email: '',
         phone: '', 
         mesagge: ''
-    };
+    };*/
 
-    const [] = useState(formInitialDetails);
+    //const [] = useState(formInitialDetails);
     //const [buttonText, setButtonText] = useState('Send');
     const [status] = useState({});
 
