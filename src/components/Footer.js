@@ -15,9 +15,9 @@ export const Footer = () => {
                     </Col>
                     <Col sm={6} className="text-center text-sm-end">
                         <div className="social-icon">
-                            <a href="#"> <img src={navIcon1} alt="nav-icon-1"/> </a>
-                            <a href="#"> <img src={navIcon2} alt="nav-icon-2"/> </a>
-                            <a href="#"> <img src={navIcon3} alt="nav-icon-3" /> </a>
+                            <a href="https://www.linkedin.com/in/hector-caez-a71057183/"> <img src={navIcon1} alt="nav-icon-1"/> </a>
+                            <a href="https://www.facebook.com/hectorfabio.caezrivas/"> <img src={navIcon2} alt="nav-icon-2"/> </a>
+                            <a href="https://www.instagram.com/hefa_cari/"> <img src={navIcon3} alt="nav-icon-3" /> </a>
                         </div>
                         <p>Copyright 2024. All Right Reserved. HEFACARI</p>
                     </Col>

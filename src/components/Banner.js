@@ -18,41 +18,40 @@ export const Banner = () => {
     const [delta, setDelta] = useState(300 - Math.random() * 100); //Delta ayuda a determina que tan rapido viene una letra despues de escribir la primera
     //const [index, setIndex] = useState('');
 
-    //Esta función es la que actualiza el texto mostrado en la pantalla letra por letra
-    const tick = () => {
-        let i = loopNum % toRotate.length; //Hace rotar las palabras hasta la longitud de toRotate, (chatgpt: calcula el indice de la palabra actual)
-        let fullText = toRotate[i]; //Hace un seguimiento a las palabras  
-        let updateText  = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1); //El texto que se actualizara (ademas de que hace un seguiento cuando se esta eliminado o escribiendo una palabra)
-        setText(updateText);
-
-        //Hace que cuando pasa al proceso de eliminacion este lo haga mas rapido
-        if(isDeleting){
-            setDelta(prevDelta => prevDelta/2);//chatpt: si se esta eliminado la velocidad 'delta' se reduce a la mitad para que el texto se elimine mas rapido
-        }
-
-        if(!isDeleting && updateText === fullText){
-            setIsDeleting(true);//Indica que el texto debe comenzar a eliminarse 
-            setDelta(period);
-        }else if(isDeleting && updateText === ''){
-            setIsDeleting(false);//Indica que el texto debe comenzar a escribirse
-            setLoopNum(loopNum + 1);
-            setDelta(500);
-        }
-    };
-
     /*Esta funcion es la que escribe o elimina las palabras o las letras de las palabras, 
     chatpgt: configura un efecto que se ejecuta cuando 'text' cambia
     setInterval: Esta función establece un intervalo de tiempo en milisegundos (delta) después del cual se ejecuta una función repetidamente. En este caso, la función tick se llama repetidamente.
     tick(): Es la función que actualiza el estado text en función del proceso de escritura y eliminación de texto.
     delta: Es el intervalo en milisegundos que determina con qué frecuencia se llama a la función tick. El valor de delta se ajusta dinámicamente para crear efectos de velocidad variables en la animación de texto (más rápido al eliminar, más lento al escribir).*/
     useEffect(() =>{
+         //Esta función es la que actualiza el texto mostrado en la pantalla letra por letra
+        const tick = () => {
+            let i = loopNum % toRotate.length; //Hace rotar las palabras hasta la longitud de toRotate, (chatgpt: calcula el indice de la palabra actual)
+            let fullText = toRotate[i]; //Hace un seguimiento a las palabras  
+            let updateText  = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1); //El texto que se actualizara (ademas de que hace un seguiento cuando se esta eliminado o escribiendo una palabra)
+            setText(updateText);
+
+            //Hace que cuando pasa al proceso de eliminacion este lo haga mas rapido
+            if(isDeleting){
+                setDelta(prevDelta => prevDelta/2);//chatpt: si se esta eliminado la velocidad 'delta' se reduce a la mitad para que el texto se elimine mas rapido
+            }
+
+            if(!isDeleting && updateText === fullText){
+                setIsDeleting(true);//Indica que el texto debe comenzar a eliminarse 
+                setDelta(period);
+            }else if(isDeleting && updateText === ''){
+                setIsDeleting(false);//Indica que el texto debe comenzar a escribirse
+                setLoopNum(loopNum + 1);
+                setDelta(500);
+            }
+        };
         let ticker = setInterval(() =>{ //chatgpt: setInterval llama a la funcion 'tick' despues de cada periodo determinado por 'delta'
             tick();
         }, delta);
 
         return () => {clearInterval(ticker);};//chatgpt: Limpia el intervalo cuando el efecto se desmonta o antes de configurarlo de nuevo
 
-    }, [delta, tick, text]);
+    }, [delta, text]);
 
     
     return(
