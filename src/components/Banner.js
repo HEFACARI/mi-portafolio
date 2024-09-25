@@ -51,7 +51,7 @@ export const Banner = () => {
 
         return () => {clearInterval(ticker);};//chatgpt: Limpia el intervalo cuando el efecto se desmonta o antes de configurarlo de nuevo
 
-    }, [delta, text]);
+    }, [delta, text, loopNum, isDeleting, toRotate]);
 
     
     return(
