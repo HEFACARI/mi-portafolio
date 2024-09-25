@@ -12,7 +12,6 @@ import TrackVisibility from 'react-on-screen';//Ayuda a que se activen las anima
 export const Banner = () => {
     const [loopNum, setLoopNum] = useState(0); //Esta linea muestra el indice en el cual se encuentran las palabras que deseo mostrar en const toRotate(chatgpt: LLeva la cuenta de cuantas veces se han rotado las palabras)
     const [isDeleting, setIsDeleting] = useState(false); // Aqui tenemos el estado principal(palabra que se escribe o se elimina)(falso porque se empieza escribiendo la palabra)(chatgpt: indica si esta eliminando texto en el banner)
-    const toRotate = ['Desarrollador Web', 'Frontend', 'Backend']; //Estas son las palabras que me gustaria mostrar
     const [text, setText] = useState('');//Indica la parte de la palabra que se esta mostrando
     const period = 2000; //Indica cuanto se demora en hacer la transicion entre cada palabra
     const [delta, setDelta] = useState(300 - Math.random() * 100); //Delta ayuda a determina que tan rapido viene una letra despues de escribir la primera
@@ -24,6 +23,8 @@ export const Banner = () => {
     tick(): Es la función que actualiza el estado text en función del proceso de escritura y eliminación de texto.
     delta: Es el intervalo en milisegundos que determina con qué frecuencia se llama a la función tick. El valor de delta se ajusta dinámicamente para crear efectos de velocidad variables en la animación de texto (más rápido al eliminar, más lento al escribir).*/
     useEffect(() =>{
+        const toRotate = ['Desarrollador Web', 'Frontend', 'Backend']; //Estas son las palabras que me gustaria mostrar
+
          //Esta función es la que actualiza el texto mostrado en la pantalla letra por letra
         const tick = () => {
             let i = loopNum % toRotate.length; //Hace rotar las palabras hasta la longitud de toRotate, (chatgpt: calcula el indice de la palabra actual)
@@ -51,7 +52,7 @@ export const Banner = () => {
 
         return () => {clearInterval(ticker);};//chatgpt: Limpia el intervalo cuando el efecto se desmonta o antes de configurarlo de nuevo
 
-    }, [delta, text, loopNum, isDeleting, toRotate]);
+    }, [delta, text, loopNum, isDeleting]);
 
     
     return(
